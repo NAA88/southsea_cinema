@@ -77,6 +77,15 @@ class BookingSection extends StatefulWidget {
 class _BookingSectionState extends State<BookingSection> {
   // State class for the BookingSection widget
   int _ticketQuantity = 1; // Default ticket quantity
+  String _bookingFeedback = '';
+
+  void _addToOrder() {
+    final String ticketWord = _ticketQuantity == 1 ? 'ticket' : 'tickets';
+    setState(() {
+      _bookingFeedback =
+          'Added $_ticketQuantity $ticketWord for $filmTitle to your order.';
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +113,19 @@ class _BookingSectionState extends State<BookingSection> {
                   });
                 }
               },
-            )
+            ), // Dropdown menu for selecting ticket quantity
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: _addToOrder,
+              child: const Text('Add to Order'),
+            ), // Button to add tickets to the order
+            if (_bookingFeedback.isNotEmpty) ...[
+              const SizedBox(height: 12),
+              Text(
+                _bookingFeedback,
+                style: const TextStyle(color: Colors.green),
+              ),
+            ]
           ],
         )
       ],
