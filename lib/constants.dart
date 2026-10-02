@@ -17,4 +17,21 @@ const TextStyle cinemaHeaderStyle = TextStyle(
   fontWeight: FontWeight.bold,
 );
 
+const TextStyle cinemaFilmTitleStyle = TextStyle(
+  color: cinemaFontWhite,
+  fontSize: 28,
+  fontWeight: FontWeight.w300,
+);
+
+const TextStyle cinemaBodyStyle = TextStyle(
+  color: cinemaFontWhite,
+  fontSize: 14,
+);
+
+const TextStyle cinemaMutedStyle = TextStyle(
+  color: cinemaFontMuted,
+  fontSize: 14,
+);
+
 const int maxTickets = 5; // Maximum number of tickets a user can book at once
+const double adultTicketPrice = 8.00; // Price of an adult ticket
