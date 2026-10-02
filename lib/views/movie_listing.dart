@@ -4,12 +4,12 @@ import 'package:southsea_cinema/widgets/nav_drawer.dart';
 
 const String filmTitle = "Nosferatu";
 const String filmDescription =
-    "An American Gothic horror film written and directed by Robert Eggers. It is a remake of  "
-    "Nosferatu: A Symphony of Horror (1922), which was in turn inspired by Bram Stoker's novel "
-    "Dracula (1897); the film combines elements of both. It stars Bill Skarsgård, Nicholas Hoult, Lily-"
-    "Rose Depp, Aaron Taylor-Johnson,"
-    "A gothic tale of obsession between a haunted young woman and the terrifying vampire"
-    "infatuated with her, causing untold horror in its wake.";
+    "An American Gothic horror film written and directed by Robert Eggers. "
+    "It is a remake of Nosferatu: A Symphony of Horror (1922), which was in "
+    "turn inspired by Bram Stoker's novel Dracula (1897); the film combines "
+    "elements of both. A gothic tale of obsession between a haunted young "
+    "woman and the terrifying vampire infatuated with her, causing untold "
+    "horror in its wake.";
 
 const String filmAgeRating = "18";
 const int filmRuntimeMinutes = 133;
@@ -32,6 +32,7 @@ class MovieListing extends StatelessWidget {
         ),
         drawer: const NavDrawer(),
         body: SingleChildScrollView(
+          // Wraps the content in a SingleChildScrollView to make it scrollable
           child: Container(
             padding: const EdgeInsets.all(16.0),
             child: const Column(
@@ -44,8 +45,11 @@ class MovieListing extends StatelessWidget {
                     Text('($filmAgeRating)'),
                   ],
                 ),
-                SizedBox(height: 4),
-                Text('$filmRuntimeMinutes min · Dir. $filmDirector'),
+                SizedBox(
+                    height:
+                        4), // Adds a small space between the title and the next line
+                Text(
+                    '$filmRuntimeMinutes min · Dir. $filmDirector'), // Displays the runtime and director information
                 SizedBox(height: 12),
                 Text(filmDescription),
                 SizedBox(height: 8),

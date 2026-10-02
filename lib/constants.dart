@@ -16,3 +16,5 @@ const TextStyle cinemaHeaderStyle = TextStyle(
   fontSize: 18,
   fontWeight: FontWeight.bold,
 );
+
+const int maxTickets = 5; // Maximum number of tickets a user can book at once
