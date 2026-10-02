@@ -59,9 +59,55 @@ class MovieListing extends StatelessWidget {
                 Divider(),
                 Text(filmScreening),
                 SizedBox(height: 12),
+                BookingSection(), // Custom widget for booking tickets
               ],
             ),
           ),
         ));
+  }
+}
+
+class BookingSection extends StatefulWidget {
+  const BookingSection({super.key});
+
+  @override
+  State<BookingSection> createState() => _BookingSectionState();
+}
+
+class _BookingSectionState extends State<BookingSection> {
+  // State class for the BookingSection widget
+  int _ticketQuantity = 1; // Default ticket quantity
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            DropdownMenu<int>(
+              width: 120,
+              initialSelection: _ticketQuantity,
+              label: const Text('Tickets'),
+              dropdownMenuEntries: List.generate(
+                maxTickets,
+                (index) => DropdownMenuEntry<int>(
+                  value: index + 1,
+                  label: '${index + 1}',
+                ),
+              ),
+              onSelected: (int? value) {
+                // Update the ticket quantity when a new value is selected
+                if (value != null) {
+                  setState(() {
+                    _ticketQuantity = value;
+                  });
+                }
+              },
+            )
+          ],
+        )
+      ],
+    );
   }
 }
