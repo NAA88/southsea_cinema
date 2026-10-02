@@ -113,21 +113,21 @@ class _BookingSectionState extends State<BookingSection> {
                   });
                 }
               },
-            ), // Dropdown menu for selecting ticket quantity
-            const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: _addToOrder,
-              child: const Text('Add to Order'),
-            ), // Button to add tickets to the order
-            if (_bookingFeedback.isNotEmpty) ...[
-              const SizedBox(height: 12),
-              Text(
-                _bookingFeedback,
-                style: const TextStyle(color: Colors.green),
-              ),
-            ]
+            ),
           ],
-        )
+        ),
+        const SizedBox(height: 16),
+        ElevatedButton(
+          onPressed: _addToOrder,
+          child: const Text('Add to Order'),
+        ),
+        if (_bookingFeedback.isNotEmpty) ...[
+          const SizedBox(height: 12),
+          Text(
+            _bookingFeedback,
+            style: const TextStyle(color: Colors.green),
+          ),
+        ],
       ],
     );
   }
