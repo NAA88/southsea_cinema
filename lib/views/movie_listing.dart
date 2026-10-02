@@ -11,6 +11,13 @@ const String filmDescription =
     "A gothic tale of obsession between a haunted young woman and the terrifying vampire"
     "infatuated with her, causing untold horror in its wake.";
 
+const String filmAgeRating = "18";
+const int filmruntimeminutes = 133;
+const String filmDirector = "Robert Eggers";
+const String filmCast =
+    "Bill Skarsgård, Nicholas Hoult, Lily-Rose Depp, Aaron Taylor-Johnson";
+const String filmScreening = 'Sunday 18 Oct 2026, 14:00';
+
 class MovieListing extends StatelessWidget {
   const MovieListing({super.key});
 
