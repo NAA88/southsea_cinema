@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/widgets/nav_drawer.dart';
 
-const String filmtitle = "Nosferatu";
+const String filmTitle = "Nosferatu";
 const String filmDescription =
     "An American Gothic horror film written and directed by Robert Eggers. It is a remake of  "
     "Nosferatu: A Symphony of Horror (1922), which was in turn inspired by Bram Stoker's novel "
@@ -12,7 +12,7 @@ const String filmDescription =
     "infatuated with her, causing untold horror in its wake.";
 
 const String filmAgeRating = "18";
-const int filmruntimeminutes = 133;
+const int filmRuntimeMinutes = 133;
 const String filmDirector = "Robert Eggers";
 const String filmCast =
     "Bill Skarsgård, Nicholas Hoult, Lily-Rose Depp, Aaron Taylor-Johnson";
@@ -31,18 +31,32 @@ class MovieListing extends StatelessWidget {
           elevation: 0,
         ),
         drawer: const NavDrawer(),
-        body: Container(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(filmtitle, style: cinemaHeaderStyle),
-              const SizedBox(height: 8.0),
-              Text(
-                filmDescription,
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-            ],
+        body: SingleChildScrollView(
+          child: Container(
+            padding: const EdgeInsets.all(16.0),
+            child: const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Text(filmTitle),
+                    SizedBox(width: 8),
+                    Text('($filmAgeRating)'),
+                  ],
+                ),
+                SizedBox(height: 4),
+                Text('$filmRuntimeMinutes min · Dir. $filmDirector'),
+                SizedBox(height: 12),
+                Text(filmDescription),
+                SizedBox(height: 8),
+                Text('Starring: $filmCast'),
+                SizedBox(height: 16),
+                Text('BOOK TICKETS'),
+                Divider(),
+                Text(filmScreening),
+                SizedBox(height: 12),
+              ],
+            ),
           ),
         ));
   }
