@@ -40,26 +40,27 @@ class MovieListing extends StatelessWidget {
             child: const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    Text(filmTitle),
-                    SizedBox(width: 8),
-                    Text('($filmAgeRating)'),
-                  ],
+                Text(
+                  '$filmTitle ($filmYear) ($filmAgeRating)',
+                  style: cinemaFilmTitleStyle,
                 ),
                 SizedBox(
                     height:
                         4), // Adds a small space between the title and the next line
                 Text(
-                    '$filmRuntimeMinutes min · Dir. $filmDirector'), // Displays the runtime and director information
+                  '$filmRuntimeMinutes min · Dir. $filmDirector',
+                  style: cinemaMutedStyle,
+                ), // Displays the runtime and director information
                 SizedBox(height: 12),
-                Text(filmDescription),
+                Text(filmDescription, style: cinemaBodyStyle),
                 SizedBox(height: 8),
-                Text('Starring: $filmCast'),
+                Text('Starring: $filmCast', style: cinemaMutedStyle),
                 SizedBox(height: 16),
-                Text('BOOK TICKETS'),
+                Text('BOOK TICKETS', style: cinemaHeaderStyle),
                 Divider(),
-                Text(filmScreening),
+                Text(filmVenue, style: cinemaBodyStyle),
+                SizedBox(height: 4),
+                Text(filmScreening, style: cinemaBodyStyle),
                 SizedBox(height: 12),
                 BookingSection(), // Custom widget for booking tickets
               ],
@@ -94,12 +95,21 @@ class _BookingSectionState extends State<BookingSection> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        const Text(
+          'Select Quantities (Up to $maxTickets in total)',
+          style: cinemaBodyStyle,
+        ),
+        const SizedBox(height: 16),
+        Text(
+          'Tickets',
+          style: cinemaBodyStyle.copyWith(fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(height: 8),
         Row(
           children: [
             DropdownMenu<int>(
               width: 120,
               initialSelection: _ticketQuantity,
-              label: const Text('Tickets'),
               dropdownMenuEntries: List.generate(
                 maxTickets,
                 (index) => DropdownMenuEntry<int>(
@@ -116,20 +126,32 @@ class _BookingSectionState extends State<BookingSection> {
                 }
               },
             ),
+            const SizedBox(width: 12),
+            Text(
+              'Adult (£${adultTicketPrice.toStringAsFixed(2)})',
+              style: cinemaBodyStyle,
+            ),
           ],
         ),
         const SizedBox(height: 8),
-        Text('Tickets selected: $_ticketQuantity'),
+        Text('Tickets selected: $_ticketQuantity', style: cinemaMutedStyle),
         const SizedBox(height: 16),
         ElevatedButton(
           onPressed: _addToOrder,
-          child: const Text('Add to Order'),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: cinemaBrand,
+            foregroundColor: cinemaFontWhite,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.zero,
+            ),
+          ),
+          child: const Text('ADD TO ORDER'),
         ),
         if (_bookingFeedback.isNotEmpty) ...[
           const SizedBox(height: 12),
           Text(
             _bookingFeedback,
-            style: const TextStyle(color: Colors.green),
+            style: const TextStyle(color: cinemaBrand),
           ),
         ],
       ],
