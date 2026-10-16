@@ -11,12 +11,14 @@ const String filmDescription =
     "woman and the terrifying vampire infatuated with her, causing untold "
     "horror in its wake.";
 
+const int filmYear = 2024;
 const String filmAgeRating = "18";
 const int filmRuntimeMinutes = 133;
 const String filmDirector = "Robert Eggers";
 const String filmCast =
     "Bill Skarsgård, Nicholas Hoult, Lily-Rose Depp, Aaron Taylor-Johnson";
-const String filmScreening = 'Sunday 18 Oct 2026, 14:00';
+const String filmVenue = "Southsea Cinema Room";
+const String filmScreening = 'Sunday 18 Oct 2026, 14:00 - ends at 16:13';
 
 class MovieListing extends StatelessWidget {
   const MovieListing({super.key});
@@ -116,6 +118,8 @@ class _BookingSectionState extends State<BookingSection> {
             ),
           ],
         ),
+        const SizedBox(height: 8),
+        Text('Tickets selected: $_ticketQuantity'),
         const SizedBox(height: 16),
         ElevatedButton(
           onPressed: _addToOrder,
