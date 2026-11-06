@@ -1,5 +1,5 @@
-class Movie {
-  final String id;
+class Movie { //template for a film
+  final String id; 
   final String title;
   final String synopsis;
   final String ageRating;
@@ -7,7 +7,7 @@ class Movie {
   final double ticketPrice;
   final String posterPath;
 
-  const Movie({
+  const Movie({ //constructor for the Movie class
     required this.id,
     required this.title,
     required this.synopsis,
