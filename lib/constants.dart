@@ -34,4 +34,9 @@ const TextStyle cinemaMutedStyle = TextStyle(
 );
 
 const int maxTickets = 5; // Maximum number of tickets a user can book at once
-const double adultTicketPrice = 8.00; // Price of an adult ticket
+
+final ButtonStyle cinemaButtonStyle = ElevatedButton.styleFrom(
+  backgroundColor: cinemaBrand,
+  foregroundColor: cinemaFontWhite,
+  shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+);
