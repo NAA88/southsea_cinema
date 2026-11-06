@@ -1,5 +1,6 @@
-class Movie { //template for a film
-  final String id; 
+class Movie {
+  //template for a film
+  final String id;
   final String title;
   final String synopsis;
   final String ageRating;
@@ -7,7 +8,8 @@ class Movie { //template for a film
   final double ticketPrice;
   final String posterPath;
 
-  const Movie({ //constructor for the Movie class
+  const Movie({
+    //constructor for the Movie class
     required this.id,
     required this.title,
     required this.synopsis,
@@ -16,4 +18,6 @@ class Movie { //template for a film
     required this.ticketPrice,
     required this.posterPath,
   });
+
+  String get formattedPrice => '£${ticketPrice.toStringAsFixed(2)}';
 }
