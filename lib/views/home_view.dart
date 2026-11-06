@@ -10,7 +10,8 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MovieRepository repository = MovieRepository(); // repoistory so the page can fetch the list of movies
+    final MovieRepository repository =
+        MovieRepository(); // repoistory so the page can fetch the list of movies
     final List<Movie> movies = repository.getMovies();
 
     return Scaffold(
