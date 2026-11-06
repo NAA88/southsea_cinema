@@ -24,6 +24,16 @@ class MovieRepository {
         ticketPrice: 6.50,
         posterPath: 'assets/images/get_out.jpg',
       ),
+      Movie(
+        id: 'coraline',
+        title: 'Coraline',
+        synopsis: 'A curious girl finds a secret door to a world that seems '
+            'better than her own, until she learns what it really wants.',
+        ageRating: 'PG',
+        screeningTime: 'Sunday 25 Oct 2026, 11:00',
+        ticketPrice: 5.00,
+        posterPath: 'assets/images/coraline.jpg',
+      ),
     ];
   }
 }
