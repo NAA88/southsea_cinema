@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
+import 'package:southsea_cinema/views/basket_view.dart';
 import 'package:southsea_cinema/views/home_view.dart';
+import 'package:southsea_cinema/views/settings_view.dart';
 
 void main() {
   runApp(const SouthseaCinemaApp());
@@ -12,7 +14,7 @@ class SouthseaCinemaApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Southsea Cinema & Arts Centre",
+      title: 'Southsea Cinema & Arts Centre',
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: cinemaBackground,
@@ -30,8 +32,16 @@ class SouthseaCinemaApp extends StatelessWidget {
         ),
       ),
       initialRoute: '/',
-      routes: {
-        '/': (context) => const HomeView(),
+      routes: <String, WidgetBuilder>{
+        '/': (BuildContext context) {
+          return const HomeView();
+        },
+        '/basket': (BuildContext context) {
+          return const BasketView();
+        },
+        '/settings': (BuildContext context) {
+          return const SettingsView();
+        },
       },
     );
   }
