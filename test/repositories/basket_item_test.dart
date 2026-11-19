@@ -80,4 +80,13 @@ void main() {
       expect(basket.getItems().length, 1);
     });
   });
+  test('removeItem ignores an index outside the basket', () {
+    basket.addItem(const BasketItem(movie: nosferatu, quantity: 2));
+
+    basket.removeItem(5);
+    basket.removeItem(-1);
+
+    expect(basket.getItems().length, 1);
+    expect(basket.getItems()[0].movie.id, 'nosferatu');
+  });
 }

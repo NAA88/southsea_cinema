@@ -17,7 +17,9 @@ class BasketRepository {
   }
 
   void removeItem(int index) {
-    _items.removeAt(index);
+    if (index >= 0 && index < _items.length) {
+      _items.removeAt(index);
+    }
   }
 
   void clear() {
