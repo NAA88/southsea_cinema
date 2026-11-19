@@ -5,12 +5,22 @@ class CinemaButton extends StatelessWidget {
   final String label;
   final VoidCallback onPressed;
 
-  const CinemaButton({super.key, required this.label, required this.onPressed});
+  const CinemaButton({
+    super.key,
+    required this.label,
+    required this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      style: cinemaButtonStyle,
+      style: ElevatedButton.styleFrom(
+        backgroundColor: cinemaBrand,
+        foregroundColor: cinemaFontWhite,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.zero,
+        ),
+      ),
       onPressed: onPressed,
       child: Text(label),
     );
