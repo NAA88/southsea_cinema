@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
+import 'package:southsea_cinema/models/basket_item.dart';
 import 'package:southsea_cinema/models/movie.dart';
-import 'package:southsea_cinema/widgets/nav_drawer.dart';
+import 'package:southsea_cinema/repositories/basket_repository.dart';
 import 'package:southsea_cinema/widgets/cinema_button.dart';
-
-const String filmVenue = 'Southsea Cinema Room';
+import 'package:southsea_cinema/widgets/nav_drawer.dart';
 
 class MovieListing extends StatefulWidget {
   final Movie movie;
@@ -12,7 +12,9 @@ class MovieListing extends StatefulWidget {
   const MovieListing({super.key, required this.movie});
 
   @override
-  State<MovieListing> createState() => _MovieListingState();
+  State<MovieListing> createState() {
+    return _MovieListingState();
+  }
 }
 
 class _MovieListingState extends State<MovieListing> {
@@ -20,7 +22,18 @@ class _MovieListingState extends State<MovieListing> {
   String _bookingFeedback = '';
 
   void _addToOrder() {
-    final String ticketWord = _ticketQuantity == 1 ? 'ticket' : 'tickets';
+    final BasketItem item = BasketItem(
+      movie: widget.movie,
+      quantity: _ticketQuantity,
+    );
+    BasketRepository.instance.addItem(item);
+
+    final String ticketWord;
+    if (_ticketQuantity == 1) {
+      ticketWord = 'ticket';
+    } else {
+      ticketWord = 'tickets';
+    }
     setState(() {
       _bookingFeedback = 'Added $_ticketQuantity $ticketWord for '
           '${widget.movie.title} to your order.';
@@ -67,10 +80,12 @@ class _MovieListingState extends State<MovieListing> {
                   initialSelection: _ticketQuantity,
                   dropdownMenuEntries: List.generate(
                     maxTickets,
-                    (index) => DropdownMenuEntry<int>(
-                      value: index + 1,
-                      label: '${index + 1}',
-                    ),
+                    (int index) {
+                      return DropdownMenuEntry<int>(
+                        value: index + 1,
+                        label: '${index + 1}',
+                      );
+                    },
                   ),
                   onSelected: (int? value) {
                     if (value != null) {

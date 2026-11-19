@@ -6,6 +6,8 @@ import 'package:southsea_cinema/views/home_view.dart';
 import 'package:southsea_cinema/views/settings_view.dart';
 import 'package:southsea_cinema/widgets/movie_card.dart';
 import 'package:southsea_cinema/widgets/nav_drawer.dart';
+import 'package:southsea_cinema/views/movie_listing.dart';
+import 'package:southsea_cinema/widgets/cinema_button.dart';
 
 void main() {
   group('Southsea Cinema app tests', () {
@@ -18,6 +20,17 @@ void main() {
       expect(find.byType(MovieCard), findsWidgets);
       expect(find.text('NOSFERATU'), findsOneWidget);
       expect(find.text('BOOK TICKETS'), findsWidgets);
+    });
+
+    testWidgets('Tapping BOOK TICKETS opens the page for that film',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(const SouthseaCinemaApp());
+
+      await tester.tap(find.widgetWithText(CinemaButton, 'BOOK TICKETS').first);
+      await tester.pumpAndSettle();
+
+      expect(find.byType(MovieListing), findsOneWidget);
+      expect(find.text('NOSFERATU (18)'), findsOneWidget);
     });
 
     testWidgets('The drawer lists every page and closes with its X button',
