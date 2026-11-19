@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/models/movie.dart';
 import 'package:southsea_cinema/widgets/nav_drawer.dart';
+import 'package:southsea_cinema/widgets/cinema_button.dart';
 
 const String filmVenue = 'Southsea Cinema Room';
 
@@ -89,11 +90,7 @@ class _MovieListingState extends State<MovieListing> {
             const SizedBox(height: 8),
             Text('Tickets selected: $_ticketQuantity', style: cinemaMutedStyle),
             const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: _addToOrder,
-              style: cinemaButtonStyle,
-              child: const Text('ADD TO ORDER'),
-            ),
+            CinemaButton(label: 'ADD TO ORDER', onPressed: _addToOrder),
             if (_bookingFeedback.isNotEmpty) ...[
               const SizedBox(height: 12),
               Text(
