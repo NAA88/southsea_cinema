@@ -9,7 +9,6 @@ class Movie {
   final String posterPath;
 
   const Movie({
-    //constructor for the Movie class
     required this.id,
     required this.title,
     required this.synopsis,
