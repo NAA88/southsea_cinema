@@ -34,6 +34,7 @@ const TextStyle cinemaMutedStyle = TextStyle(
 );
 
 const int maxTickets = 5; // Maximum number of tickets a user can book at once
+const double serviceCharge = 4.00; // Added once to every non-empty basket
 
 final ButtonStyle cinemaButtonStyle = ElevatedButton.styleFrom(
   backgroundColor: cinemaBrand,
