@@ -16,12 +16,15 @@ import 'package:shared_preferences_platform_interface/shared_preferences_async_p
 void main() {
   setUp(() {
     rootBundle.clear();
+    SharedPreferencesAsyncPlatform.instance =
+        InMemorySharedPreferencesAsync.empty();
   });
 
   group('Southsea Cinema app tests', () {
     testWidgets('home page shows its title, movie cards and booking buttons',
         (WidgetTester tester) async {
       await tester.pumpWidget(const SouthseaCinemaApp());
+      await tester.pumpAndSettle();
 
       expect(find.byType(HomeView), findsOneWidget);
       expect(find.text('Southsea Cinema'), findsOneWidget);
@@ -33,6 +36,7 @@ void main() {
     testWidgets('Tapping BOOK TICKETS opens the page for that film',
         (WidgetTester tester) async {
       await tester.pumpWidget(const SouthseaCinemaApp());
+      await tester.pumpAndSettle();
 
       await tester.tap(find.widgetWithText(CinemaButton, 'BOOK TICKETS').first);
       await tester.pumpAndSettle();
@@ -44,6 +48,7 @@ void main() {
     testWidgets('The drawer lists every page and closes with its X button',
         (WidgetTester tester) async {
       await tester.pumpWidget(const SouthseaCinemaApp());
+      await tester.pumpAndSettle();
 
       await tester.tap(find.byIcon(Icons.menu));
       await tester.pumpAndSettle();
@@ -61,6 +66,7 @@ void main() {
     testWidgets('My Basket in the drawer opens the basket page',
         (WidgetTester tester) async {
       await tester.pumpWidget(const SouthseaCinemaApp());
+      await tester.pumpAndSettle();
 
       await tester.tap(find.byIcon(Icons.menu));
       await tester.pumpAndSettle();
@@ -73,6 +79,7 @@ void main() {
     testWidgets('My Settings in the drawer opens the settings page',
         (WidgetTester tester) async {
       await tester.pumpWidget(const SouthseaCinemaApp());
+      await tester.pumpAndSettle();
 
       await tester.tap(find.byIcon(Icons.menu));
       await tester.pumpAndSettle();
