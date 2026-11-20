@@ -10,6 +10,8 @@ import 'package:southsea_cinema/views/movie_listing.dart';
 import 'package:southsea_cinema/widgets/cinema_button.dart';
 import 'package:flutter/services.dart';
 import 'package:southsea_cinema/repositories/basket_repository.dart';
+import 'package:shared_preferences_platform_interface/in_memory_shared_preferences_async.dart';
+import 'package:shared_preferences_platform_interface/shared_preferences_async_platform_interface.dart';
 
 void main() {
   setUp(() {
