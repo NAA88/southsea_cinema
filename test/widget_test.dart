@@ -8,8 +8,13 @@ import 'package:southsea_cinema/widgets/movie_card.dart';
 import 'package:southsea_cinema/widgets/nav_drawer.dart';
 import 'package:southsea_cinema/views/movie_listing.dart';
 import 'package:southsea_cinema/widgets/cinema_button.dart';
+import 'package:flutter/services.dart';
 
 void main() {
+  setUp(() {
+    rootBundle.clear();
+  });
+
   group('Southsea Cinema app tests', () {
     testWidgets('home page shows its title, movie cards and booking buttons',
         (WidgetTester tester) async {
