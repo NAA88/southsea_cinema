@@ -9,6 +9,7 @@ import 'package:southsea_cinema/widgets/nav_drawer.dart';
 import 'package:southsea_cinema/views/movie_listing.dart';
 import 'package:southsea_cinema/widgets/cinema_button.dart';
 import 'package:flutter/services.dart';
+import 'package:southsea_cinema/repositories/basket_repository.dart';
 
 void main() {
   setUp(() {
@@ -77,6 +78,42 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.byType(SettingsView), findsOneWidget);
+    });
+    testWidgets('Tickets for a film from the JSON file can be bought',
+        (WidgetTester tester) async {
+      BasketRepository.instance.clear();
+      await tester.pumpWidget(const SouthseaCinemaApp());
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.widgetWithText(CinemaButton, 'BOOK TICKETS').first);
+      await tester.pumpAndSettle();
+      await tester.ensureVisible(find.text('ADD TO ORDER'));
+      await tester.tap(find.text('ADD TO ORDER'));
+      await tester.pump();
+      await tester.tap(find.byType(DropdownMenu<int>));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('2').last);
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('ADD TO ORDER'));
+      await tester.pump();
+
+      await tester.tap(find.byIcon(Icons.menu));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('My Basket'));
+      await tester.pumpAndSettle();
+      expect(find.text('1 Ticket'), findsOneWidget);
+      expect(find.text('2 Tickets'), findsOneWidget);
+      expect(find.text('£28.00'), findsOneWidget);
+
+      await tester.tap(find.byIcon(Icons.delete_outline).first);
+      await tester.pump();
+      expect(find.text('1 Ticket'), findsNothing);
+      expect(find.text('£20.00'), findsOneWidget);
+
+      await tester.tap(find.text('BUY TICKETS'));
+      await tester.pump();
+      expect(BasketRepository.instance.getItems(), isEmpty);
+      expect(find.text('Thank you, your tickets are booked.'), findsOneWidget);
     });
   });
 }
