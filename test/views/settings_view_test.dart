@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:southsea_cinema/views/settings_view.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shared_preferences_platform_interface/in_memory_shared_preferences_async.dart';
 import 'package:shared_preferences_platform_interface/shared_preferences_async_platform_interface.dart';
+import 'package:southsea_cinema/views/settings_view.dart';
 
 void main() {
   setUp(() {
@@ -42,9 +43,44 @@ void main() {
     expect(tester.widget<Switch>(switchFinder).value, isTrue);
 
     await tester.tap(find.text('SAVE SETTINGS'));
-    await tester.pump();
+    await tester.pumpAndSettle();
 
     expect(find.text('Settings saved for alex@example.com'), findsOneWidget);
+
+    final SharedPreferencesAsync prefs = SharedPreferencesAsync();
+    expect(await prefs.getString(prefAddress), '10 Example Road, Southsea');
+    expect(await prefs.getString(prefEmail), 'alex@example.com');
+    expect(await prefs.getString(prefPatronNumber), '1234');
+    expect(await prefs.getBool(prefEmailNews), isTrue);
+
+    await tester.pumpWidget(const SizedBox.shrink());
+    await tester.pumpWidget(const MaterialApp(home: SettingsView()));
+    await tester.pumpAndSettle();
+    expect(find.text('10 Example Road, Southsea'), findsOneWidget);
+    expect(find.text('alex@example.com'), findsOneWidget);
+    expect(find.text('1234'), findsOneWidget);
+    final Switch reopenedSwitch = tester.widget<Switch>(find.byType(Switch));
+    expect(reopenedSwitch.value, isTrue);
+  });
+
+  testWidgets('SettingsView pre-fills saved settings on open',
+      (WidgetTester tester) async {
+    SharedPreferencesAsyncPlatform.instance =
+        InMemorySharedPreferencesAsync.withData(<String, Object>{
+      prefAddress: '22 Sample Street, Portsmouth',
+      prefEmail: 'sam@example.com',
+      prefPatronNumber: '5678',
+      prefEmailNews: true,
+    });
+
+    await tester.pumpWidget(const MaterialApp(home: SettingsView()));
+    await tester.pumpAndSettle();
+
+    expect(find.text('22 Sample Street, Portsmouth'), findsOneWidget);
+    expect(find.text('sam@example.com'), findsOneWidget);
+    expect(find.text('5678'), findsOneWidget);
+    final Switch switchWidget = tester.widget<Switch>(find.byType(Switch));
+    expect(switchWidget.value, isTrue);
   });
 
   testWidgets('CANCEL closes the settings page', (WidgetTester tester) async {
@@ -61,11 +97,17 @@ void main() {
         },
       ),
     );
+    await tester.pumpAndSettle();
 
+    await tester.enterText(
+      find.widgetWithText(TextField, 'Email Address'),
+      'alex@example.com',
+    );
     await tester.tap(find.text('CANCEL'));
     await tester.pumpAndSettle();
 
     expect(find.byType(SettingsView), findsNothing);
     expect(find.text('Home page'), findsOneWidget);
+    expect(await SharedPreferencesAsync().getString(prefEmail), isNull);
   });
 }
